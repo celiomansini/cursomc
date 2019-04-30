@@ -2,12 +2,22 @@ package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+//Classe de domínio
+//Domain
+@Entity //indica que a classe é uma entidade do JPA
 public class Categoria implements Serializable {
 
 	// Serializable: objetos podem ser convertidos em sequencias de bytes
 	private static final long serialVersionUID = 1L;
 
 	// atributos basicos
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
 
