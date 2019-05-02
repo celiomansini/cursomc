@@ -1,23 +1,16 @@
 package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-//Classe de domínio
-//Domain
 @Entity // indica que a classe é uma entidade do JPA
-public class Produto implements Serializable {
+public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// atributos basicos
@@ -25,23 +18,20 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Double preco;
 
-	// JPA -- muitos pra muitos de acordo com o modelo
-	// tabela que relaciona produtos e categorias
-	@JsonBackReference //do outro lado já buscaram os objetos. Omitir lista de categorias para cada produto
-	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-	private List<Categoria> categorias = new ArrayList<>();
+	// somente um Estado conforme diagrama!
+	@ManyToOne
+	@JoinColumn(name = "estado_id") // chave estrangeira da tabela Cidade no BD
+	private Estado estado;
 
-	public Produto() {
+	public Cidade() {
 	}
 
-	public Produto(Integer id, String nome, Double preco) {
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.preco = preco;
+		this.estado = estado;
 	}
 
 	public Integer getId() {
@@ -60,23 +50,14 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
-	public Double getPreco() {
-		return preco;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
-
-	// hashcode e equals apenas pelo Id
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,7 +74,7 @@ public class Produto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

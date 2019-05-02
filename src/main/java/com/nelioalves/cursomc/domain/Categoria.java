@@ -22,7 +22,7 @@ public class Categoria implements Serializable {
 
 	// atributos basicos
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 
