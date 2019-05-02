@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 //Classe de domínio
 //Domain
 @Entity // indica que a classe é uma entidade do JPA
@@ -27,6 +29,7 @@ public class Produto implements Serializable {
 
 	// JPA -- muitos pra muitos de acordo com o modelo
 	// tabela que relaciona produtos e categorias
+	@JsonBackReference //do outro lado já buscaram os objetos. Omitir lista de categorias para cada produto
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
