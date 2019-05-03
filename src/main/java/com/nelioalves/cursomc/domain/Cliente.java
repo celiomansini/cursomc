@@ -12,10 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 
 @Entity
@@ -35,12 +34,14 @@ public class Cliente implements Serializable {
 
 	// Um cliente tem vários enderecos
 	@OneToMany(mappedBy = "cliente")
+	@JsonManagedReference // permite a serialização dos enderecos
+	// do outro lado, @JsonBackReference
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	// telefone seria uma classe com apenas 1 atributo
 	// opcao eh implementar colecao / conjunto de strings
 	// Set == sem repeticao
-	@ElementCollection//vai criar tabela no BD
+	@ElementCollection // vai criar tabela no BD
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
