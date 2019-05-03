@@ -20,10 +20,10 @@ import com.nelioalves.cursomc.repositories.ProdutoRepository;
 public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
-	private CategoriaRepository catRepository;
+	private CategoriaRepository categoriaRepository;
 
 	@Autowired
-	private ProdutoRepository prodRepository;
+	private ProdutoRepository produtoRepository;
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
@@ -64,8 +64,8 @@ public class CursomcApplication implements CommandLineRunner {
 		est2.getCidades().addAll(Arrays.asList(c2, c3));
 
 		//gravando no banco
-		catRepository.saveAll(Arrays.asList(cat1, cat2));
-		prodRepository.saveAll(Arrays.asList(p1, p2, p3));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
