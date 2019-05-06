@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //Classe de domínio
 //Domain
@@ -40,6 +41,7 @@ public class Produto implements Serializable {
 
 	// adicionado
 	@OneToMany(mappedBy = "id.produto")//mapeado por quem do outro lado?
+	@JsonIgnore
 	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Produto() {
@@ -52,6 +54,7 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
+	@JsonIgnore
 	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
 		for (ItemPedido x : itens) {

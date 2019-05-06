@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //classe de associacao sem ID próprio
 public class ItemPedido implements Serializable {
@@ -13,6 +15,7 @@ public class ItemPedido implements Serializable {
 
 	// atributo composto
 	@EmbeddedId // ID embutido em tipo auxiliar
+	@JsonIgnore // nao serializa nem Pedido nem Produto
 	private ItemPedidoPK id = new ItemPedidoPK();
 
 	private Double desconto;
@@ -65,11 +68,12 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 
-//adicionados
+//adicionado
+	@JsonIgnore // evita referencia cíclica
 	public Pedido getPedido() {
 		return this.id.getPedido();
 	}
-
+	//adicionado
 	public Produto getProduto() {
 		return this.id.getProduto();
 	}
