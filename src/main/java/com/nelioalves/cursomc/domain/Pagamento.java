@@ -23,7 +23,9 @@ public class Pagamento implements Serializable {
 	// mesmo Id do Pedido ---> mapeamento bidirecional 1 x 1
 	private Integer id;
 
-	private EstadoPagamento estado;
+	//EstadoPagamento
+	//adaptacao
+	private Integer estado;
 
 	// mesmo Id do Pedido ---> relação 1 x 1
 	@OneToOne
@@ -37,16 +39,16 @@ public class Pagamento implements Serializable {
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		super();
 		this.id = id;
-		this.setEstado(estado);
+		this.estado = estado.getCod();
 		this.pedido = pedido;
 	}
 
 	public EstadoPagamento getEstado() {
-		return estado;
+		return EstadoPagamento.toEnum(estado);
 	}
 
 	public void setEstado(EstadoPagamento estado) {
-		this.estado = estado;
+		this.estado = estado.getCod();
 	}
 
 	public Integer getId() {
