@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido implements Serializable {
@@ -33,10 +32,10 @@ public class Pedido implements Serializable {
 	// mapeamento bidirecional 1 x 1
 	@OneToOne(cascade = CascadeType.ALL, // evita erro de entidade transiente --- JPA
 			mappedBy = "pedido") // mapeado pelo atributo pedido da classe Pagamento
-	@JsonManagedReference//permite serializacao
+	// @JsonManagedReference//permite serializacao
 	private Pagamento pagamento;
 
-	@JsonManagedReference
+	// @JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
@@ -44,10 +43,10 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
-	
-	//adicionado
-	//pedido conhece os itens associados a ele
-	@OneToMany(mappedBy = "id.pedido")//quem mapeou do outro lado?
+
+	// adicionado
+	// pedido conhece os itens associados a ele
+	@OneToMany(mappedBy = "id.pedido") // quem mapeou do outro lado?
 	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Pedido() {
@@ -100,7 +99,6 @@ public class Pedido implements Serializable {
 	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
-	
 
 	public Set<ItemPedido> getItens() {
 		return itens;
@@ -134,6 +132,5 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-
 
 }

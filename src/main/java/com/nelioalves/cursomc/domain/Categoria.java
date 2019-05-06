@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 //Classe de domínio
 //Domain
 @Entity // indica que a classe é uma entidade do JPA
@@ -27,8 +25,8 @@ public class Categoria implements Serializable {
 	private String nome;
 
 	// associada com Produtos...
-	@JsonManagedReference
-	@ManyToMany (mappedBy = "categorias")
+//	@JsonManagedReference
+	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 
 	// construtores

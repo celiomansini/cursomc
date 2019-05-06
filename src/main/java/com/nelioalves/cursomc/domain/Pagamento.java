@@ -10,11 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)//superclasse
+@Inheritance(strategy = InheritanceType.JOINED) // superclasse
 public class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,15 +24,16 @@ public class Pagamento implements Serializable {
 	// mesmo Id do Pedido ---> mapeamento bidirecional 1 x 1
 	private Integer id;
 
-	//EstadoPagamento
-	//adaptacao
+	// EstadoPagamento
+	// adaptacao
 	private Integer estado;
 
 	// mesmo Id do Pedido ---> relação 1 x 1
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
-	@JsonBackReference//impede serializacao
+	// @JsonBackReference//impede serializacao
+	@JsonIgnore
 	private Pedido pedido;
 
 	public Pagamento() {

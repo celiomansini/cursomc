@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity // indica que a classe é uma entidade do JPA
 public class Estado implements Serializable {
@@ -24,7 +24,8 @@ public class Estado implements Serializable {
 
 	// Um Estado com várias cidades
 	@OneToMany(mappedBy = "estado") // atributo que mapeou na outra classe (Cidade)
-	@JsonBackReference//bloqueia a serializacao Json
+	// @JsonBackReference//bloqueia a serializacao Json
+	@JsonIgnore
 	private List<Cidade> cidades = new ArrayList<>();
 
 	public Estado() {
